@@ -64,14 +64,36 @@ public class ArticleController {
 		return "redirect:/article";
 	}
 
-	
+	/**
+	 * コメント情報を登録する.
+	 * 
+	 * @param form
+	 * @return コメント情報
+	 */
 	@RequestMapping("/insertComment")
 	public String insertComment(Comment form) {
 		Comment comment = new Comment();
 		BeanUtils.copyProperties(form, comment);
-		
+
 		commentRepository.insert(comment);
-		
+
 		return "redirect:/article";
+	}
+
+	/**
+	 * 記事情報を削除する.
+	 * 
+	 * @param id
+	 * @return 記事情報
+	 */
+	@RequestMapping("/deleteArticle")
+	public String deleteArticle(String id) {
+
+		int deleteId = Integer.parseInt(id);
+
+		articleRepository.deletById(deleteId);
+
+		return "redirect:/article";
+
 	}
 }
