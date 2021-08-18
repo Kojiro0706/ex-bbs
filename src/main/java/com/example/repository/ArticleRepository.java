@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import com.example.domain.Article;
@@ -34,10 +36,21 @@ public class ArticleRepository {
 	 * @return 記事情報
 	 */
 	public List<Article> findAll(){
-		String sql = "SELECT id, name, content, article_id FROM articles ORDER BY id";
+		String sql = "SELECT id, name, content FROM articles ORDER BY id";
 		
 		List<Article> articleList = template.query(sql, ARTICLE_ROW_MAPPER);
 		
 		return articleList;
+	}
+	
+	/**
+	 * 記事情報を挿入する.
+	 * 
+	 * @param article 記事情報
+	 */
+	public void insert(Article article) {
+		SqlParameterSource param = new BeanPropertySqlParameterSource(article);
+		String sql = "INSERT INTO articles(id, name, content)VALUES(:id,:name,:content)";
+		template.update(sql, param);
 	}
 }
