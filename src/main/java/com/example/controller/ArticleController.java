@@ -9,8 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Article;
+import com.example.domain.Comment;
 import com.example.form.ArticleForm;
 import com.example.repository.ArticleRepository;
+import com.example.repository.CommentRepository;
 
 
 /**
@@ -26,6 +28,9 @@ public class ArticleController {
 	@Autowired
 	private ArticleRepository articleRepository;
 	
+	@Autowired
+	private CommentRepository commentRepository;
+	
 	
 	/**
 	 * 記事情報を一覧で表示する.
@@ -35,9 +40,12 @@ public class ArticleController {
 	 */
 	@RequestMapping("")
 	public String index(Model model) {
-		
 		List<Article> articleList = articleRepository.findAll();
-		
+		for(Article article:articleList) {
+			int articleId = article.getId();
+			List<Comment> commentList = commentRepository.findByArticleId(articleId);
+			article.setCommentList(commentList);
+		}
 		model.addAttribute("articleList", articleList);
 		
 		return "article-list";
@@ -57,4 +65,6 @@ public class ArticleController {
 		
 		return "redirect:/article";
 	}
+	
+	
 }
