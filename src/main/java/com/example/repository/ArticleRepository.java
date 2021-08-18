@@ -57,15 +57,10 @@ public class ArticleRepository {
 	 * @param id ID
 	 */
 	public void deletById(int id) {
-		String deleteCommentsSql = "DELETE FROM comments WHERE article_id = :id";
-
+		
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
-
-		template.update(deleteCommentsSql, param);
-
-		String deleteArticleSql = "DELETE FROM articles WHERE id = :id";
-
-		template.update(deleteArticleSql, param);
+		String sql = "DELETE FROM articles WHERE id = :id";
+		template.update(sql, param);
 
 	}
 }

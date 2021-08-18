@@ -90,7 +90,7 @@ public class ArticleController {
 	public String deleteArticle(String id) {
 
 		int deleteId = Integer.parseInt(id);
-
+		commentRepository.deleteByArticleId(deleteId);
 		articleRepository.deletById(deleteId);
 
 		return "redirect:/article";
