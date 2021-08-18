@@ -1,6 +1,5 @@
 package com.example.domain;
 
-
 /**
  * コメントを表すドメインクラス.
  * 
@@ -16,7 +15,7 @@ public class Comment {
 	/** コンテント */
 	private String content;
 	/** 記事ID */
-	private Integer articledID;
+	private Integer articledId;
 
 	public Comment() {
 
@@ -27,7 +26,7 @@ public class Comment {
 		this.id = id;
 		this.name = name;
 		this.content = content;
-		this.articledID = articledID;
+		this.articledId = articledID;
 	}
 
 	public Integer getId() {
@@ -54,18 +53,17 @@ public class Comment {
 		this.content = content;
 	}
 
-	public Integer getArticledID() {
-		return articledID;
+	public Integer getArticledId() {
+		return articledId;
 	}
 
-	public void setArticledID(Integer articledID) {
-		this.articledID = articledID;
+	public void setArticledId(Integer articledId) {
+		this.articledId = articledId;
 	}
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", name=" + name + ", content=" + content + ", articledID=" + articledID + "]";
+		return "Comment [id=" + id + ", name=" + name + ", content=" + content + ", articledId=" + articledId + "]";
 	}
 
-	
 }
