@@ -55,6 +55,6 @@ public class ArticleController {
 		BeanUtils.copyProperties(form, article);
 		articleRepository.insert(article);
 		
-		return "article-list";
+		return "redirect:/article";
 	}
 }

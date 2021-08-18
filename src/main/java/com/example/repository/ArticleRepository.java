@@ -36,7 +36,7 @@ public class ArticleRepository {
 	 * @return 記事情報
 	 */
 	public List<Article> findAll(){
-		String sql = "SELECT id, name, content FROM articles ORDER BY id";
+		String sql = "SELECT id, name, content FROM articles ORDER BY id DESC";
 		
 		List<Article> articleList = template.query(sql, ARTICLE_ROW_MAPPER);
 		
@@ -50,7 +50,7 @@ public class ArticleRepository {
 	 */
 	public void insert(Article article) {
 		SqlParameterSource param = new BeanPropertySqlParameterSource(article);
-		String sql = "INSERT INTO articles(id, name, content)VALUES(:id,:name,:content)";
+		String sql = "INSERT INTO articles(name, content)VALUES(:name,:content)";
 		template.update(sql, param);
 	}
 }
